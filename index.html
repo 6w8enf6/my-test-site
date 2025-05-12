@@ -2,17 +2,70 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>test site</title>
-  <link rel="stylesheet" href="style.css">
+  <title>自動計算テーブル</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 60%;
+      margin: 20px auto;
+    }
+    th, td {
+      border: 1px solid #888;
+      padding: 8px;
+      text-align: center;
+    }
+    input {
+      width: 80px;
+    }
+  </style>
 </head>
 <body>
-  <h1>計算アプリ</h1>
-  <input type="number" id="a" placeholder="数値A">
-  +
-  <input type="number" id="b" placeholder="数値B">
-  <button onclick="calc()">＝</button>
-  <span id="result"></span>
+  <h1 style="text-align:center;">自動計算テーブル</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>入力値</th>
+        <th>計算結果（×2）</th>
+      </tr>
+    </thead>
+    <tbody id="calc-table">
+      <!-- 5行分を最初から表示 -->
+      <tr>
+        <td><input type="number" class="input-val"></td>
+        <td class="output-val"></td>
+      </tr>
+      <tr>
+        <td><input type="number" class="input-val"></td>
+        <td class="output-val"></td>
+      </tr>
+      <tr>
+        <td><input type="number" class="input-val"></td>
+        <td class="output-val"></td>
+      </tr>
+      <tr>
+        <td><input type="number" class="input-val"></td>
+        <td class="output-val"></td>
+      </tr>
+      <tr>
+        <td><input type="number" class="input-val"></td>
+        <td class="output-val"></td>
+      </tr>
+    </tbody>
+  </table>
 
-  <script src="script.js"></script>
+  <script>
+    // 入力が変わったときに計算を実行
+    document.querySelectorAll('.input-val').forEach((input, index) => {
+      input.addEventListener('input', () => {
+        const value = parseFloat(input.value);
+        const resultCell = document.querySelectorAll('.output-val')[index];
+        if (!isNaN(value)) {
+          resultCell.textContent = value * 2; // ← 計算式はここを変更
+        } else {
+          resultCell.textContent = '';
+        }
+      });
+    });
+  </script>
 </body>
 </html>
