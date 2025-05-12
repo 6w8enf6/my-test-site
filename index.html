@@ -2,70 +2,107 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>自動計算テーブル</title>
+  <title>ワイバーン放置時間</title>
   <style>
+    .container {
+      display: flex;
+      justify-content: space-around;
+      padding: 20px;
+    }
+    .table-box {
+      width: 45%;
+    }
     table {
       border-collapse: collapse;
-      width: 60%;
-      margin: 20px auto;
+      width: 100%;
     }
     th, td {
-      border: 1px solid #888;
-      padding: 8px;
+      border: 1px solid #666;
+      padding: 6px;
       text-align: center;
     }
-    input {
-      width: 80px;
+    h2 {
+      text-align: center;
     }
   </style>
 </head>
 <body>
-  <h1 style="text-align:center;">自動計算テーブル</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>入力値</th>
-        <th>計算結果（×2）</th>
-      </tr>
-    </thead>
-    <tbody id="calc-table">
-      <!-- 5行分を最初から表示 -->
-      <tr>
-        <td><input type="number" class="input-val"></td>
-        <td class="output-val"></td>
-      </tr>
-      <tr>
-        <td><input type="number" class="input-val"></td>
-        <td class="output-val"></td>
-      </tr>
-      <tr>
-        <td><input type="number" class="input-val"></td>
-        <td class="output-val"></td>
-      </tr>
-      <tr>
-        <td><input type="number" class="input-val"></td>
-        <td class="output-val"></td>
-      </tr>
-      <tr>
-        <td><input type="number" class="input-val"></td>
-        <td class="output-val"></td>
-      </tr>
-    </tbody>
-  </table>
+
+  <h1 style="text-align:center;">ワイバーン放置時間</h1>
+
+  <h3 style="text-align:center;">(成熟0%の場合)</h3>
+
+  <div class="container">
+    <div class="table-box">
+      <table id="table-left">
+        <thead>
+          <tr>
+            <th>食料値</th>
+            <th>放置時間</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="table-box">
+      <table id="table-right">
+        <thead>
+          <tr>
+            <th>食料値</th>
+            <th>放置時間</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
 
   <script>
-    // 入力が変わったときに計算を実行
-    document.querySelectorAll('.input-val').forEach((input, index) => {
-      input.addEventListener('input', () => {
-        const value = parseFloat(input.value);
-        const resultCell = document.querySelectorAll('.output-val')[index];
-        if (!isNaN(value)) {
-          resultCell.textContent = value * 2; // ← 計算式はここを変更
+
+    function formatMinutes(totalMinutes) {
+        totalMinutes = Math.floor(totalMinutes);
+        const hours = Math.floor(totalMinutes / 60);
+        const minutes = totalMinutes % 60;
+        if (hours > 0) {
+            return `${hours}h${minutes}m`;
         } else {
-          resultCell.textContent = '';
+            return `${minutes}m`;
         }
-      });
-    });
+    }
+
+    const rowCount = 36;
+    const timeUnit = 16.67;
+
+    // 左側の表
+    const leftTbody = document.querySelector('#table-left tbody');
+    for (let i = 1; i <= rowCount/2; i++) {
+      const row = document.createElement('tr');
+      const cell1 = document.createElement('td');
+      const cell2 = document.createElement('td');
+
+      cell1.textContent = i * 100;
+      cell2.textContent = formatMinutes(i * timeUnit);
+
+      row.appendChild(cell1);
+      row.appendChild(cell2);
+      leftTbody.appendChild(row);
+    }
+
+    // 右側の表
+    const rightTbody = document.querySelector('#table-right tbody');
+    for (let i = (rowCount/2)+1; i <= rowCount; i++) {
+      const row = document.createElement('tr');
+      const cell1 = document.createElement('td');
+      const cell2 = document.createElement('td');
+
+      cell1.textContent = i * 100;
+      cell2.textContent = formatMinutes(i * timeUnit);
+
+      row.appendChild(cell1);
+      row.appendChild(cell2);
+      rightTbody.appendChild(row);
+    }
   </script>
 </body>
 </html>
