@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>色相環</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    #tooltip {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid #aaa;
+      padding: 5px 10px;
+      font-size: 14px;
+      pointer-events: none;
+      display: none;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .footer-link {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="colorWheel" width="500" height="500"></canvas>
+  <div id="tooltip"></div>
+
+  <script>
+    // 構造体：id, name, hsv, rgb（16進コード）
+    const hueCircle = [
+      { id: "001",  name: "Red",     hsv: { h: 0,   s: 100, v: 100 }, rgb: "#FF0000" },
+      { id: "075",  name: "Orange",   hsv: { h: 30,  s: 100, v: 100 }, rgb: "#FF8000" },
+      { id: "004",  name: "Yellow",     hsv: { h: 60,  s: 100, v: 100 }, rgb: "#FFFF00" },
+      { id: "155",  name: "Chartreuse Coloring",   hsv: { h: 90,  s: 100, v: 100 }, rgb: "#80FF00" },
+      { id: "003",  name: "Green",     hsv: { h: 120, s: 100, v: 100 }, rgb: "#00FF00" },
+      { id: "171",  name: "Spring Coloring",   hsv: { h: 150, s: 100, v: 100 }, rgb: "#00FF80" },
+      { id: "005",  name: "Cyan",     hsv: { h: 180, s: 100, v: 100 }, rgb: "#00FFFF" },
+      { id: "187",  name: "Azure Coloring",   hsv: { h: 210, s: 100, v: 100 }, rgb: "#0080FF" },
+      { id: "002",  name: "Blue",     hsv: { h: 240, s: 100, v: 100 }, rgb: "#0000FF" },
+      { id: "203",  name: "Violet Coloring",   hsv: { h: 270, s: 100, v: 100 }, rgb: "#8000FF" },
+      { id: "006", name: "Magenta",     hsv: { h: 300, s: 100, v: 100 }, rgb: "#FF00FF" },
+      { id: "219", name: "Fuschia Coloring",   hsv: { h: 330, s: 100, v: 100 }, rgb: "#FF007F" },
+
+      //{ id: "220",  name: "Flamingo Coloring",   hsv: { h: 330,  s: 54, v: 100 }, rgb: "#FF73B9" },
+      //{ id: "245",  name: "Gold Coloring",   hsv: { h: 45,  s: 100, v: 100 }, rgb: "#FFC000" },
+      //{ id: "247", name: "Craggy-Dew Coloring", hsv: { h: 75,  s: 92, v: 91 }, rgb: "#B3E912" },
+    ];
+
+    const canvas = document.getElementById("colorWheel");
+    const ctx = canvas.getContext("2d");
+    const tooltip = document.getElementById("tooltip");
+    const cx = canvas.width / 2;
+    const cy = canvas.height / 2;
+    const radius = 150;
+    const circleRadius = 30;
+
+    // 位置計算
+    hueCircle.forEach(color => {
+      const angle = (color.hsv.h - 90) * Math.PI / 180;
+      let r = radius;
+      if (color.hsv.h % 30 != 0 || color.hsv.s != 100 || color.hsv.v != 100) {
+        r *= 1.5;
+      }
+      color.x = cx + r * Math.cos(angle);
+      color.y = cy + r * Math.sin(angle);
+    });
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      hueCircle.forEach(color => {
+        // 色の丸
+        ctx.beginPath();
+        ctx.arc(color.x, color.y, circleRadius, 0, Math.PI * 2);
+        ctx.fillStyle = color.rgb;
+        ctx.fill();
+
+        // 色ID（中央に表示）
+        ctx.fillStyle = "black";
+        ctx.font = "16px sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(color.id, color.x, color.y);
+      });
+
+      // 中心にタイトル
+      ctx.fillStyle = "#333";
+      ctx.font = "20px sans-serif";
+      ctx.fillText("ASAColor", cx, cy);
+    }
+
+    // マウスオーバーでツールチップ表示
+    canvas.addEventListener("mousemove", e => {
+      const rect = canvas.getBoundingClientRect();
+      const mx = e.clientX - rect.left;
+      const my = e.clientY - rect.top;
+      let found = false;
+
+      for (const color of hueCircle) {
+        const dx = mx - color.x;
+        const dy = my - color.y;
+        if (dx * dx + dy * dy < circleRadius * circleRadius) {
+          tooltip.style.left = `${e.pageX + 10}px`;
+          tooltip.style.top = `${e.pageY + 10}px`;
+          tooltip.innerHTML =
+            `<strong>${color.name}</strong><br>` +
+            `RGB: <code>${color.rgb}</code><br>` +
+            `HSV: <code>H:${color.hsv.h} S:${color.hsv.s}% V:${color.hsv.v}%</code>`;
+          tooltip.style.display = "block";
+          found = true;
+          break;
+        }
+      }
+
+      if (!found) {
+        tooltip.style.display = "none";
+      }
+    });
+
+    canvas.addEventListener("mouseleave", () => {
+      tooltip.style.display = "none";
+    });
+
+    draw();
+  </script>
+
+  <div class="footer-link">
+    <a href="./index.html">back</a>
+  </div>
+</body>
+</html>

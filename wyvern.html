@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ワイバーン放置時間</title>
+  <style>
+    .container {
+      display: flex;
+      justify-content: space-around;
+      padding: 20px;
+    }
+    .table-box {
+      width: 45%;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      border: 1px solid #666;
+      padding: 6px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1 style="text-align:center;">ワイバーン放置時間</h1>
+
+  <div class="container">
+    <div class="table-box">
+      <table id="table-left">
+        <thead>
+          <tr>
+            <th>食料値</th>
+            <th>放置時間</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="table-box">
+      <table id="table-right">
+        <thead>
+          <tr>
+            <th>食料値</th>
+            <th>放置時間</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="wyvern.js"></script>
+
+  <div style="text-align:center;"><a href="index.html">back</a></div>
+</body>
+</html>
