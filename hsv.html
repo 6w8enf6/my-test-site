@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>色相環</title>
+  <link rel="stylesheet" href="common.css" type="text/css">
   <style>
     body {
       margin: 0;
@@ -29,27 +30,41 @@
       transform: translateX(-50%);
       text-align: center;
     }
+    .page-wrapper {
+      display: flex;
+      flex-direction: column; /* 子要素を縦に並べる */
+    }
   </style>
 </head>
 <body>
+
+  <div class="page-wrapper">
+
+  <nav class="breadcrumb">
+    <a href="index.html">ASATools</a> &gt;
+    <span>色相環</span>
+  </nav>
+
   <canvas id="colorWheel" width="500" height="500"></canvas>
   <div id="tooltip"></div>
+
+  </div>
 
   <script>
     // 構造体：id, name, hsv, rgb（16進コード）
     const hueCircle = [
-      { id: "001",  name: "Red",     hsv: { h: 0,   s: 100, v: 100 }, rgb: "#FF0000" },
-      { id: "075",  name: "Orange",   hsv: { h: 30,  s: 100, v: 100 }, rgb: "#FF8000" },
-      { id: "004",  name: "Yellow",     hsv: { h: 60,  s: 100, v: 100 }, rgb: "#FFFF00" },
+      { id: "001",  name: "Red", hsv: { h: 0,   s: 100, v: 100 }, rgb: "#FF0000" },
+      { id: "075",  name: "Orange", hsv: { h: 30,  s: 100, v: 100 }, rgb: "#FF8000" },
+      { id: "004",  name: "Yellow", hsv: { h: 60,  s: 100, v: 100 }, rgb: "#FFFF00" },
       { id: "155",  name: "Chartreuse Coloring",   hsv: { h: 90,  s: 100, v: 100 }, rgb: "#80FF00" },
-      { id: "003",  name: "Green",     hsv: { h: 120, s: 100, v: 100 }, rgb: "#00FF00" },
+      { id: "003",  name: "Green", hsv: { h: 120, s: 100, v: 100 }, rgb: "#00FF00" },
       { id: "171",  name: "Spring Coloring",   hsv: { h: 150, s: 100, v: 100 }, rgb: "#00FF80" },
-      { id: "005",  name: "Cyan",     hsv: { h: 180, s: 100, v: 100 }, rgb: "#00FFFF" },
+      { id: "005",  name: "Cyan", hsv: { h: 180, s: 100, v: 100 }, rgb: "#00FFFF" },
       { id: "187",  name: "Azure Coloring",   hsv: { h: 210, s: 100, v: 100 }, rgb: "#0080FF" },
-      { id: "002",  name: "Blue",     hsv: { h: 240, s: 100, v: 100 }, rgb: "#0000FF" },
+      { id: "002",  name: "Blue", hsv: { h: 240, s: 100, v: 100 }, rgb: "#0000FF" },
       { id: "203",  name: "Violet Coloring",   hsv: { h: 270, s: 100, v: 100 }, rgb: "#8000FF" },
-      { id: "006", name: "Magenta",     hsv: { h: 300, s: 100, v: 100 }, rgb: "#FF00FF" },
-      { id: "219", name: "Fuschia Coloring",   hsv: { h: 330, s: 100, v: 100 }, rgb: "#FF007F" },
+      { id: "006", name: "Magenta", hsv: { h: 300, s: 100, v: 100 }, rgb: "#FF00FF" },
+      { id: "219", name: "Fuschia Coloring", hsv: { h: 330, s: 100, v: 100 }, rgb: "#FF007F" },
 
       //{ id: "220",  name: "Flamingo Coloring",   hsv: { h: 330,  s: 54, v: 100 }, rgb: "#FF73B9" },
       //{ id: "245",  name: "Gold Coloring",   hsv: { h: 45,  s: 100, v: 100 }, rgb: "#FFC000" },
@@ -133,9 +148,5 @@
 
     draw();
   </script>
-
-  <div class="footer-link">
-    <a href="./index.html">back</a>
-  </div>
 </body>
 </html>

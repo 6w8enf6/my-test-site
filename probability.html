@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>統合確率</title>
+  <link rel="stylesheet" href="common.css" type="text/css">
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    .section {
+      margin-bottom: 20px;
+      text-align:center;
+    }
+    .group {
+      margin-left: 20px;
+      text-align:center;
+    }
+    .label-fixed { display: inline-block; width: 50px; } /* 表示ずれ防止 */
+    label { margin-right: 1em; }
+    #back-link {
+      text-align: center;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="breadcrumb">
+    <a href="index.html">ASATools</a> &gt;
+    <span>統合確率</span>
+  </nav>
+
+  <h1>統合確率</h1>
+
+  <!-- 性別 -->
+  <div class="section">
+    <h2>性別</h2>
+    <label><input type="radio" name="gender" value="指定あり"> 指定あり</label>
+    <label><input type="radio" name="gender" value="ランダム" checked> ランダム</label>
+  </div>
+
+  <!-- ステータス -->
+  <div class="section">
+    <h2>ステータス</h2>
+    <div class="group">
+      <div><span class="label-fixed">HP:</span>
+        <label><input type="radio" name="status1" value="低"> 低</label>
+        <label><input type="radio" name="status1" value="高"> 高</label>
+        <label><input type="radio" name="status1" value="ランダム" checked> ランダム</label>
+      </div>
+      <div><span class="label-fixed">St:</span>
+        <label><input type="radio" name="status2" value="低"> 低</label>
+        <label><input type="radio" name="status2" value="高"> 高</label>
+        <label><input type="radio" name="status2" value="ランダム" checked> ランダム</label>
+      </div>
+      <div><span class="label-fixed">Ox:</span>
+        <label><input type="radio" name="status3" value="低"> 低</label>
+        <label><input type="radio" name="status3" value="高"> 高</label>
+        <label><input type="radio" name="status3" value="ランダム" checked> ランダム</label>
+      </div>
+      <div><span class="label-fixed">Fo:</span>
+        <label><input type="radio" name="status4" value="低"> 低</label>
+        <label><input type="radio" name="status4" value="高"> 高</label>
+        <label><input type="radio" name="status4" value="ランダム" checked> ランダム</label>
+      </div>
+      <div><span class="label-fixed">Wt:</span>
+        <label><input type="radio" name="status5" value="低"> 低</label>
+        <label><input type="radio" name="status5" value="高"> 高</label>
+        <label><input type="radio" name="status5" value="ランダム" checked> ランダム</label>
+      </div>
+      <div><span class="label-fixed">MD:</span>
+        <label><input type="radio" name="status6" value="低"> 低</label>
+        <label><input type="radio" name="status6" value="高"> 高</label>
+        <label><input type="radio" name="status6" value="ランダム" checked> ランダム</label>
+      </div>
+      <div><span class="label-fixed">CS:</span>
+        <label><input type="radio" name="status7" value="低"> 低</label>
+        <label><input type="radio" name="status7" value="高"> 高</label>
+        <label><input type="radio" name="status7" value="ランダム" checked> ランダム</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- カラー -->
+  <div class="section">
+    <h2>カラー</h2>
+    <div class="group">
+      <div><span class="label-fixed">R0:</span>
+        <label><input type="radio" name="color1" value="指定あり"> 指定あり</label>
+        <label><input type="radio" name="color1" value="ランダム" checked> ランダム</label>
+      </div>
+      <div><span class="label-fixed">R1:</span>
+        <label><input type="radio" name="color2" value="指定あり"> 指定あり</label>
+        <label><input type="radio" name="color2" value="ランダム" checked> ランダム</label>
+      </div>
+      <div><span class="label-fixed">R2:</span>
+        <label><input type="radio" name="color3" value="指定あり"> 指定あり</label>
+        <label><input type="radio" name="color3" value="ランダム" checked> ランダム</label>
+      </div>
+      <div><span class="label-fixed">R3:</span>
+        <label><input type="radio" name="color4" value="指定あり"> 指定あり</label>
+        <label><input type="radio" name="color4" value="ランダム" checked> ランダム</label>
+      </div>
+      <div><span class="label-fixed">R4:</span>
+        <label><input type="radio" name="color5" value="指定あり"> 指定あり</label>
+        <label><input type="radio" name="color5" value="ランダム" checked> ランダム</label>
+      </div>
+      <div><span class="label-fixed">R5:</span>
+        <label><input type="radio" name="color6" value="指定あり"> 指定あり</label>
+        <label><input type="radio" name="color6" value="ランダム" checked> ランダム</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>出力結果:</h3>
+    <p id="formula"></p>
+  </div>
+
+  <div class="section">
+    <table border="1" cellspacing="0" cellpadding="5" id="probTable">
+      <thead>
+        <tr>
+          <th>目標成功確率</th>
+          <th>必要な試行回数</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+
+  <script src="probability.js"></script>
+ 
+  <nav class="breadcrumb">
+    <a href="index.html">ASATools</a> &gt;
+    <span>統合確率</span>
+  </nav>
+</body>
+</html>
