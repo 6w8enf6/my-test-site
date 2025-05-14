@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>暗号名生成</title>
+  <link rel="stylesheet" href="common.css" type="text/css">
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+    input[type="text"], input[type="number"] {
+      font-size: 1.5em;
+      padding: 8px;
+      margin-bottom: 12px;
+      width: 400px;
+    }
+    label {
+      font-size: 1.2em;
+    }
+    #outputRow {
+      display: none;
+      align-items: center;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    #outputText {
+      font-family: monospace;
+      font-size: 1.5em;
+    }
+    button {
+      font-size: 1em;
+      padding: 6px 12px;
+    }
+    #description {
+      margin-top: 40px;
+      font-size: 1.1em;
+      color: #333;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <nav class="breadcrumb">
+    <a href="index.html">ASATools</a> &gt;
+    <span>統合確率</span>
+  </nav>
+
+  <h2 style="font-size: 1.8em;">暗号名生成</h2>
+
+  <input type="text" id="inputText" placeholder="ここに文字列を入力">
+
+  <label for="lengthInput">出力長（最大24文字）:</label>
+  <input type="number" id="lengthInput" min="1" max="24" value="12">
+
+  <div id="outputRow">
+    <span id="outputText"></span>
+    <button onclick="copyOutput()">コピー</button>
+  </div>
+
+  <div id="description">
+    生物名として使える暗号化文字列を生成します<br>
+    例: h44m50 → 70a30c2a601a
+  </div>
+
+  <script>
+    const ngWords = ["000", "fuck"];
+    const maxAttempts = 50;
+    const inputEl = document.getElementById("inputText");
+    const lengthEl = document.getElementById("lengthInput");
+    const outputEl = document.getElementById("outputText");
+    const outputRow = document.getElementById("outputRow");
+
+    function containsNG(str) {
+      return ngWords.some(word => str.includes(word));
+    }
+
+    async function sha256(text) {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(text);
+      const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    async function autoEncrypt() {
+      const input = inputEl.value.trim();
+      const length = Math.max(1, Math.min(parseInt(lengthEl.value) || 12, 64));
+
+      if (input === "") {
+        outputRow.style.display = "none";
+        return;
+      }
+
+      for (let i = 0; i < maxAttempts; i++) {
+        const combined = input + "#" + i;
+        const hash = await sha256(combined);
+        const result = hash.slice(0, length);
+        if (!containsNG(result)) {
+          outputEl.textContent = result;
+          outputRow.style.display = "flex";
+          return;
+        }
+      }
+
+      outputRow.style.display = "none";
+    }
+
+    function copyOutput() {
+      const text = outputEl.textContent;
+      navigator.clipboard.writeText(text);
+    }
+
+    inputEl.addEventListener("input", autoEncrypt);
+    lengthEl.addEventListener("input", autoEncrypt);
+  </script>
+</body>
+</html>
