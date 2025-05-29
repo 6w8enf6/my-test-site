@@ -1,0 +1,23 @@
+.breadcrumb {
+    font-size: 0.9em;
+    text-align: left;
+    margin-bottom: 2em;
+    padding-left: 1em;
+    text-align: center;
+}
+
+.breadcrumb a {
+    color: #0366d6;
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    .breadcrumb {
+        font-size: 0.85em;
+        padding-left: 0.5em;
+    }
+}

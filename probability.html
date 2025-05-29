@@ -1,134 +1,206 @@
 <!DOCTYPE html>
 <html lang="ja">
+<!-- probability.html ver2.0 date2025/05/29 -->
 <head>
-  <meta charset="UTF-8">
-  <title>統合確率</title>
-  <link rel="stylesheet" href="common.css" type="text/css">
-  <style>
-    body { font-family: sans-serif; padding: 20px; }
-    .section {
-      margin-bottom: 20px;
-      text-align:center;
-    }
-    .group {
-      margin-left: 20px;
-      text-align:center;
-    }
-    .label-fixed { display: inline-block; width: 50px; } /* 表示ずれ防止 */
-    label { margin-right: 1em; }
-    #back-link {
-      text-align: center;
-      margin-top: 40px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>統合確率</title>
+    <link rel="stylesheet" href="breadcrumb.css" type="text/css">
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        h2 {
+            margin-top: 16px;
+            margin-bottom: 4px;
+        }
+
+        .content {
+            text-align: center;
+        }
+
+        .radio-flex {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        label {
+            margin: 4px;
+        }
+
+        .output {
+            font-size: 2em;
+            margin: 0px;
+        }
+    </style>
 </head>
+
 <body>
-  <nav class="breadcrumb">
-    <a href="index.html">ASATools</a> &gt;
-    <span>統合確率</span>
-  </nav>
+    <nav class="breadcrumb">
+        <a href="index.html">ASATools</a> &gt;
+        <span>統合確率</span>
+    </nav>
 
-  <h1>統合確率</h1>
+    <main class="content">
+        <h1>統合確率</h1>
 
-  <!-- 性別 -->
-  <div class="section">
-    <h2>性別</h2>
-    <label><input type="radio" name="gender" value="指定あり"> 指定あり</label>
-    <label><input type="radio" name="gender" value="ランダム" checked> ランダム</label>
-  </div>
+        <hr />
 
-  <!-- ステータス -->
-  <div class="section">
-    <h2>ステータス</h2>
-    <div class="group">
-      <div><span class="label-fixed">HP:</span>
-        <label><input type="radio" name="status1" value="低"> 低</label>
-        <label><input type="radio" name="status1" value="高"> 高</label>
-        <label><input type="radio" name="status1" value="ランダム" checked> ランダム</label>
-      </div>
-      <div><span class="label-fixed">St:</span>
-        <label><input type="radio" name="status2" value="低"> 低</label>
-        <label><input type="radio" name="status2" value="高"> 高</label>
-        <label><input type="radio" name="status2" value="ランダム" checked> ランダム</label>
-      </div>
-      <div><span class="label-fixed">Ox:</span>
-        <label><input type="radio" name="status3" value="低"> 低</label>
-        <label><input type="radio" name="status3" value="高"> 高</label>
-        <label><input type="radio" name="status3" value="ランダム" checked> ランダム</label>
-      </div>
-      <div><span class="label-fixed">Fo:</span>
-        <label><input type="radio" name="status4" value="低"> 低</label>
-        <label><input type="radio" name="status4" value="高"> 高</label>
-        <label><input type="radio" name="status4" value="ランダム" checked> ランダム</label>
-      </div>
-      <div><span class="label-fixed">Wt:</span>
-        <label><input type="radio" name="status5" value="低"> 低</label>
-        <label><input type="radio" name="status5" value="高"> 高</label>
-        <label><input type="radio" name="status5" value="ランダム" checked> ランダム</label>
-      </div>
-      <div><span class="label-fixed">MD:</span>
-        <label><input type="radio" name="status6" value="低"> 低</label>
-        <label><input type="radio" name="status6" value="高"> 高</label>
-        <label><input type="radio" name="status6" value="ランダム" checked> ランダム</label>
-      </div>
-      <div><span class="label-fixed">CS:</span>
-        <label><input type="radio" name="status7" value="低"> 低</label>
-        <label><input type="radio" name="status7" value="高"> 高</label>
-        <label><input type="radio" name="status7" value="ランダム" checked> ランダム</label>
-      </div>
-    </div>
-  </div>
+        <h2>性別</h2>
+        <div class="radio-flex">
 
-  <!-- カラー -->
-  <div class="section">
-    <h2>カラー</h2>
-    <div class="group">
-      <div><span class="label-fixed">R0:</span>
-        <label><input type="radio" name="color1" value="指定あり"> 指定あり</label>
-        <label><input type="radio" name="color1" value="ランダム" checked> ランダム</label>
-      </div>
-      <div><span class="label-fixed">R1:</span>
-        <label><input type="radio" name="color2" value="指定あり"> 指定あり</label>
-        <label><input type="radio" name="color2" value="ランダム" checked> ランダム</label>
-      </div>
-      <div><span class="label-fixed">R2:</span>
-        <label><input type="radio" name="color3" value="指定あり"> 指定あり</label>
-        <label><input type="radio" name="color3" value="ランダム" checked> ランダム</label>
-      </div>
-      <div><span class="label-fixed">R3:</span>
-        <label><input type="radio" name="color4" value="指定あり"> 指定あり</label>
-        <label><input type="radio" name="color4" value="ランダム" checked> ランダム</label>
-      </div>
-      <div><span class="label-fixed">R4:</span>
-        <label><input type="radio" name="color5" value="指定あり"> 指定あり</label>
-        <label><input type="radio" name="color5" value="ランダム" checked> ランダム</label>
-      </div>
-      <div><span class="label-fixed">R5:</span>
-        <label><input type="radio" name="color6" value="指定あり"> 指定あり</label>
-        <label><input type="radio" name="color6" value="ランダム" checked> ランダム</label>
-      </div>
-    </div>
-  </div>
+            <label><input type="radio" name="gender" value="0" checked>ランダム</label>
+            <label><input type="radio" name="gender" value="1">指定あり</label>
+        </div>
 
-  <div class="section">
-    <h3>出力結果:</h3>
-    <p id="formula"></p>
-  </div>
+        <h2>高いステの数</h2>
+        <div class="radio-flex">
+            <label><input type="radio" name="high-stat-count" value="0" checked>無し</label>
+            <label><input type="radio" name="high-stat-count" value="1">1個</label>
+            <label><input type="radio" name="high-stat-count" value="2">2個</label>
+            <label><input type="radio" name="high-stat-count" value="3">3個</label>
+            <label><input type="radio" name="high-stat-count" value="4">4個</label>
+            <label><input type="radio" name="high-stat-count" value="5">5個</label>
+            <label><input type="radio" name="high-stat-count" value="6">6個</label>
+            <label><input type="radio" name="high-stat-count" value="7">7個</label>
+        </div>
 
-  <div class="section">
-    <table border="1" cellspacing="0" cellpadding="5" id="probTable">
-      <thead>
-        <tr>
-          <th>目標成功確率</th>
-          <th>必要な試行回数</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
-  </div>
+        <h2>低いステの数</h2>
+        <div class="radio-flex">
+            <label><input type="radio" name="low-stat-count" value="0" checked>無し</label>
+            <label><input type="radio" name="low-stat-count" value="1">1個</label>
+            <label><input type="radio" name="low-stat-count" value="2">2個</label>
+            <label><input type="radio" name="low-stat-count" value="3">3個</label>
+            <label><input type="radio" name="low-stat-count" value="4">4個</label>
+            <label><input type="radio" name="low-stat-count" value="5">5個</label>
+            <label><input type="radio" name="low-stat-count" value="6">6個</label>
+            <label><input type="radio" name="low-stat-count" value="7">7個</label>
+        </div>
 
-  <script src="probability.js"></script>
+        <h2>カラーの数</h2>
+        <div class="radio-flex">
+            <label><input type="radio" name="color-count" value="0" checked>無し</label>
+            <label><input type="radio" name="color-count" value="1">1個</label>
+            <label><input type="radio" name="color-count" value="2">2個</label>
+            <label><input type="radio" name="color-count" value="3">3個</label>
+            <label><input type="radio" name="color-count" value="4">4個</label>
+            <label><input type="radio" name="color-count" value="5">5個</label>
+            <label><input type="radio" name="color-count" value="6">6個</label>
+        </div>
 
+        <hr />
+
+        <h2>排出率</h2>
+
+        <p class="output" id="output1">0.5^2 = 0.25 (25%)</p>
+
+        <hr />
+
+        <h2>必要な試行回数</h2>
+
+        <label for="target-probality">目標成功確率:</label>
+        <select name="target-probality" id="target-probality" required>
+            <option value="10">10%</option>
+            <option value="25">25%</option>
+            <option value="33">33%</option>
+            <option value="50">50%</option>
+            <option value="60">60%</option>
+            <option value="70">70%</option>
+            <option value="80" selected>80%</option>
+            <option value="90">90%</option>
+            <option value="95">95%</option>
+        </select>
+
+        <p class="output" id="output2">8回</p>
+
+    </main>
+
+    <script>
+        // ラジオボタンの値を取得する
+        function getRadioValue(name) {
+            const selected = document.querySelector(`input[name="${name}"]:checked`);
+            return selected ? selected.value : null;
+        }
+
+        // 出力を更新
+        function updateResult() {
+            let count50p = 0;
+            let count55p = 0;
+            let count45p = 0;
+            count50p += parseInt(getRadioValue("gender"), 10);
+            count55p += parseInt(getRadioValue("high-stat-count"), 10);
+            count45p += parseInt(getRadioValue("low-stat-count"), 10);
+            count50p += parseInt(getRadioValue("color-count"), 10);
+
+            let probability = 1.0;
+            let formula = "";
+
+            // 確率0.5の要素
+            for (let i = 0; i < count50p; i++) {
+                probability *= 0.5;
+            }
+
+            // 確率0.55の要素
+            for (let i = 0; i < count55p; i++) {
+                probability *= 0.55;
+            }
+
+            // 確率0.45の要素
+            for (let i = 0; i < count45p; i++) {
+                probability *= 0.45;
+            }
+
+            // 数式の作成
+            if (count50p > 1) {
+                formula += `0.5^${count50p}`;
+            }
+            else if (count50p > 0) {
+                formula += "0.5";
+            }
+            if (count55p > 1) {
+                if (formula != "") formula += " + ";
+                formula += `0.55^${count55p}`;
+            }
+            else if (count55p > 0) {
+                if (formula != "") formula += " + ";
+                formula += "0.55";
+            }
+            if (count45p > 1) {
+                if (formula != "") formula += " + ";
+                formula += `0.45^${count45p}`;
+            }
+            else if (count45p > 0) {
+                if (formula != "") formula += " + ";
+                formula += "0.45";
+            }
+            if (formula == "") {
+                formula = "1.0";
+            }
+
+            // 目標成功確率
+            const targetProbality = parseFloat(document.getElementById("target-probality").value) * 0.01;
+            let n = 1;
+            while (1 - Math.pow(1 - probability, n) < targetProbality) {
+                n++;
+                if (n > 1000000) break;
+            }
+
+            document.getElementById("output1").textContent = `${formula} = ${probability.toFixed(4)} (${(probability * 100).toFixed(2)}%)`;
+            document.getElementById("output2").textContent = `${n}回`;
+        }
+
+        // リスナーを登録
+        document.addEventListener("DOMContentLoaded", () => {
+            updateResult();
+            const radios = document.querySelectorAll('input[type="radio"]');
+            radios.forEach(radio => {
+                radio.addEventListener("change", updateResult);
+            });
+            document.getElementById("target-probality").addEventListener("change", updateResult);
+        });
+
+    </script>
 </body>
+
 </html>

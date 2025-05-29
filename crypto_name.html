@@ -1,72 +1,83 @@
 <!DOCTYPE html>
 <html lang="ja">
+<!-- crypto_name.html ver2.0 date2025/05/23 -->
 <head>
   <meta charset="UTF-8">
   <title>暗号名生成</title>
-  <link rel="stylesheet" href="common.css" type="text/css">
+  <link rel="stylesheet" href="breadcrumb.css" type="text/css">
   <style>
     body {
-      font-family: sans-serif;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
       margin: 0;
-      padding: 20px;
+      padding: 2em;
+      text-align: center;
+      background-color: #fdfdfd;
+      color: #333;
     }
-    input[type="text"], input[type="number"] {
+
+    h1 {
+      font-size: 1.8em;
+      margin-bottom: 0.5em;
+    }
+
+    input[type="text"],
+    input[type="number"] {
       font-size: 1.5em;
-      padding: 8px;
-      margin-bottom: 12px;
-      width: 400px;
     }
+
     label {
       font-size: 1.2em;
     }
+
+    .container {
+      display: flex;
+      flex-flow: column;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+    }
+
     #outputRow {
       display: none;
       align-items: center;
       gap: 12px;
-      margin-top: 20px;
     }
+
     #outputText {
       font-family: monospace;
       font-size: 1.5em;
     }
+
     button {
       font-size: 1em;
       padding: 6px 12px;
     }
-    #description {
-      margin-top: 40px;
-      font-size: 1.1em;
-      color: #333;
-      text-align: center;
-    }
+
   </style>
 </head>
+
 <body>
   <nav class="breadcrumb">
     <a href="index.html">ASATools</a> &gt;
-    <span>統合確率</span>
+    <span>暗号名生成</span>
   </nav>
 
   <h2 style="font-size: 1.8em;">暗号名生成</h2>
 
-  <input type="text" id="inputText" placeholder="ここに文字列を入力">
+  <div class="container">
+    <input type="text" id="inputText" placeholder="ここに文字列を入力">
+    <label for="lengthInput">出力長（最大24文字）:</label>
+    <input type="number" id="lengthInput" min="1" max="24" value="12">
 
-  <label for="lengthInput">出力長（最大24文字）:</label>
-  <input type="number" id="lengthInput" min="1" max="24" value="12">
+    <div id="outputRow">
+      <span id="outputText"></span>
+      <button onclick="copyOutput()">コピー</button>
+    </div>
 
-  <div id="outputRow">
-    <span id="outputText"></span>
-    <button onclick="copyOutput()">コピー</button>
-  </div>
-
-  <div id="description">
-    生物名として使える暗号化文字列を生成します<br>
-    例: h44m50 → 70a30c2a601a
+    <p>
+      生物名として使える暗号化文字列を生成します<br>
+      例: h44m50 → 70a30c2a601a
+    </p>
   </div>
 
   <script>
@@ -94,6 +105,7 @@
       const length = Math.max(1, Math.min(parseInt(lengthEl.value) || 12, 64));
 
       if (input === "") {
+        outputEl.textContent = "";
         outputRow.style.display = "none";
         return;
       }
@@ -121,4 +133,5 @@
     lengthEl.addEventListener("input", autoEncrypt);
   </script>
 </body>
+
 </html>
